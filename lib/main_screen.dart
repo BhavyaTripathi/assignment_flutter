@@ -21,6 +21,8 @@ class _MainScreenState extends State<MainScreen> {
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if(!serviceEnabled){
+      var snackBar = const SnackBar(content: Text('Turn on your Location.'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return Future.error('Location services are disabled');
     }
     LocationPermission permission = await Geolocator.checkPermission();
